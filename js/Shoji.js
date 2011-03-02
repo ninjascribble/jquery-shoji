@@ -19,15 +19,18 @@
     this.opts = opts;
     
     this.screen = $('<div></div>').
-      css('backgroundColor', '#fff').
       css({ position: 'absolute', display: 'none' }).
       appendTo('body');
     
   };
   
+  Shoji.prototype.setBackgroundColor = function(value) {
+    this.screen.css('backgroundColor', value);
+  };
+  
   Shoji.prototype.init = function(x,y,w,h) {
     this.createScreen(x,y,w,h);
-  }
+  };
   
   Shoji.prototype.createScreen = function(x,y,w,h) {
     var css = {
@@ -93,6 +96,20 @@
     var w = this.outerWidth();
     var h = this.outerHeight();
     
+    // Get the bg color of the nearest parent that has one
+    var bg = '#fff';
+    var p = this.parents();
+    
+    for (var i = 0; i < p.length; i++) {
+      var pbg = $(p[i]).css('backgroundColor');
+      if (pbg === 'transparent') continue;
+      else {
+        bg = pbg;
+        break;
+      }
+    }
+    
+    s.setBackgroundColor(pbg);
     s.init(x,y,w,h);
     
     return this;
@@ -100,25 +117,3 @@
   };
   
 })(jQuery);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
