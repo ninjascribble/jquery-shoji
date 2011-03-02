@@ -1,0 +1,14 @@
+Shoji is a plugin build especially for elements that just want a little bit of privacy while they change state.
+
+jQuery's native transition effects don't always work the way we expect them to: Repeated invocation of fadeIn/Out can cause an element to get stuck at an opacity level; Fading text in and out can look really ugly (in /some/ browsers); and it turns out that IE's implementation of <canvas> doesn't react to changes in opacity... at all!
+
+Shoji doesn't try to apply a transition to an element. Instead it creates a new element to use as a mask, and applies the transition to it.
+
+Usage:
+
+$(selector).shoji(duration, callback, [opts]);
+
+Options:
+
+  - inEffect ('fade' or 'slide')
+  - outEffect ('fade' or 'slide')
